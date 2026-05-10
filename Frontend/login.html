@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinTrack - Login</title>
+  <link rel="stylesheet" href="/static/login-style.css">
+</head>
+<body>
+ 
+  <div class="left">
+    <div class="logo">
+      <div class="logo-icon">FT</div>
+      FinTrack
+    </div>
+    <div class="left-text">
+      <h1>Master Your Money In Seconds</h1>
+      <p>Track income, control spending, and hit your savings goals — all in one clean dashboard.</p>
+    </div>
+    <img src="/static/image.png" alt="Dashboard Preview">
+  </div>
+ 
+  <div class="right">
+ 
+    <div id="login-form">
+      <h2>Welcome Back</h2>
+      <p class="sub">Enter your email and password to access your account.</p>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="Your Email" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="Password" />
+      </div>
+      <div class="row">
+        <label><input type="checkbox" /> Remember Me</label>
+        <a href="#">Forgot Your Password?</a>
+      </div>
+      <button class="btn" onclick="login(event)">Log In</button>
+      <p class="signup">Don't Have An Account? <a href="#" onclick="showRegister()">Register Now.</a></p>
+    </div>
+ 
+    <div id="register-form" style="display: none;">
+      <h2>Create Account</h2>
+      <p class="sub">Fill in the details below to get started.</p>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="reg-name" placeholder="Your Full Name" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="reg-email" placeholder="Your Email" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="reg-password" placeholder="Create Password" />
+      </div>
+      <button class="btn" onclick="register(event)">Register</button>
+      <p class="signup">Already Have An Account? <a href="#" onclick="showLogin()">Log In.</a></p>
+    </div>
+ 
+  </div>
+ 
+  <div class="footer">
+    Copyright &copy; 2025 FinTrack Enterprises LTD.
+  </div>
+ 
+  <script src="/static/login-script.js"></script>
+</body>
+</html>

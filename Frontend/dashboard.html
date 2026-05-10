@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinTrack - Dashboard</title>
+  <link rel="stylesheet" href="/static/dashboard-style.css" />
+</head>
+<body>
+ 
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">FT</div>
+      FinTrack
+    </div>
+    <a href="/static/dashboard.html" class="nav-item active">📊 Dashboard</a>
+    <a href="/static/transactions.html" class="nav-item">⇄ Transactions</a>
+    <a href="/static/budget.html" class="nav-item">◎ Budget</a>
+ 
+    <div class="sidebar-spacer"></div>
+ 
+    <div class="user-box">
+      <div id="user-name">Loading...</div>
+      <div id="user-email" style="font-size: 11px; color: #c7c7f5;">—</div>
+      <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+  </div>
+ 
+  <div class="main">
+ 
+    <div class="topbar">
+      <div>
+        <div class="page-title">Dashboard</div>
+        <div class="page-sub">Your financial overview</div>
+      </div>
+      <button class="add-btn" onclick="showModal()">+ Add Transaction</button>
+    </div>
+ 
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-label">Total Balance</div>
+        <div class="card-value blue" id="card-balance">₹0</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Total Income</div>
+        <div class="card-value green" id="card-income">₹0</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Total Expenses</div>
+        <div class="card-value red" id="card-expense">₹0</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Savings Rate</div>
+        <div class="card-value orange" id="card-savings">0%</div>
+      </div>
+    </div>
+ 
+    <div class="box">
+      <div class="box-header">
+        <div class="box-title">Recent Transactions</div>
+        <a href="/static/transactions.html" class="see-all">See all →</a>
+      </div>
+      <div id="tx-list">Loading...</div>
+    </div>
+ 
+  </div>
+ 
+  <div id="modal" style="display:none;">
+    <div class="modal-box">
+      <h3>Add Transaction</h3>
+ 
+      <div class="form-group">
+        <label>Type</label>
+        <select id="tx-type">
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+      </div>
+ 
+      <div class="form-group">
+        <label>Amount (₹)</label>
+        <input type="number" id="tx-amount" placeholder="0.00" />
+      </div>
+ 
+      <div class="form-group">
+        <label>Note</label>
+        <input type="text" id="tx-note" placeholder="e.g. Grocery shopping" />
+      </div>
+ 
+      <div class="form-group">
+        <label>Category</label>
+        <select id="tx-category">
+          <option value="">Select category</option>
+        </select>
+      </div>
+ 
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="tx-date" />
+      </div>
+ 
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="hideModal()">Cancel</button>
+        <button class="btn-save" onclick="saveTransaction()">Save</button>
+      </div>
+    </div>
+  </div>
+ 
+  <script src="/static/dashboard.js"></script>
+  <script src="/static/utils.js"></script>
+</body>
+</html>

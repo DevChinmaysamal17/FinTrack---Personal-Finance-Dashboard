@@ -1,0 +1,37 @@
+# Virtual Environment
+venv/
+Backend/venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment variables
+.env
+
+# Database
+*.db
+*.sqlite3
+
+# macOS
+.DS_Store
+__MACOSX/
+
+# VS Code
+.vscode/
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+
+# Build files
+dist/
+build/
+*.egg-info/
+
+# Node modules (if frontend uses npm)
+node_modules/
