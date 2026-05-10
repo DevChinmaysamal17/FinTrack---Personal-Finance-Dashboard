@@ -168,7 +168,7 @@ FinTrack/
 
 ## 1. Clone Repository
 
-git clone https://github.com/Devchinmaysamal17/FinTrack.git
+git clone https://github.com/DevChinmaysamal17/FinTrack---Personal-Finance-Dashboard.git
 
 ---
 
