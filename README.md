@@ -108,7 +108,6 @@ FinTrack/
 ├── requirements.txt
 ├── README.md
 └── .gitignore
-```
 
 ---
 
