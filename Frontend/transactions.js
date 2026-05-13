@@ -1,9 +1,6 @@
-// transactions.js — depends on utils.js being loaded first
-
 let allTransactions = [];
 let deleteId = null;
 
-// ── Modal ─────────────────────────────────────────────────
 function showModal() {
     document.getElementById("modal").style.display = "flex";
     document.getElementById("tx-date").value = new Date().toISOString().split("T")[0];
@@ -24,7 +21,6 @@ function hideConfirm() {
     document.getElementById("confirm-modal").style.display = "none";
 }
 
-// ── Categories ────────────────────────────────────────────
 async function loadCategories() {
     try {
         const response = await fetch(`${BASE_URL}/categories`, {
@@ -46,7 +42,6 @@ async function loadCategories() {
     }
 }
 
-// ── Save transaction ──────────────────────────────────────
 async function saveTransaction() {
     const amount      = document.getElementById("tx-amount").value;
     const type        = document.getElementById("tx-type").value;
@@ -86,9 +81,6 @@ async function saveTransaction() {
     }
 }
 
-// ── Delete transaction ────────────────────────────────────
-// FIX: was confirmDelete(id) called with no argument from the button
-// Now uses the module-level deleteId variable set by showConfirm()
 async function confirmDelete() {
     if (!deleteId) return;
 
@@ -109,7 +101,7 @@ async function confirmDelete() {
     }
 }
 
-// ── Filter ────────────────────────────────────────────────
+
 function applyFilter() {
     const type = document.getElementById("filter-type").value;
     const filtered = type === ""
@@ -120,7 +112,7 @@ function applyFilter() {
     renderStats(filtered);
 }
 
-// ── Render table ──────────────────────────────────────────
+
 function renderTable(transactions) {
     const tbody = document.getElementById("tx-body");
 
@@ -132,11 +124,8 @@ function renderTable(transactions) {
     let html = "";
 
     transactions.forEach(tx => {
-        // FIX: category name now works because backend returns category object
         const cat  = tx.category ? tx.category.name : "—";
         const sign = tx.type === "income" ? "+" : "−";
-
-        // FIX: date is now formatted properly instead of raw ISO string
         const date = formatDate(tx.date);
 
         html += `
@@ -151,10 +140,9 @@ function renderTable(transactions) {
         `;
     });
 
-    tbody.innerHTML = html;  // FIX: set once, not += in a loop (avoids repeated reflows)
+    tbody.innerHTML = html; 
 }
 
-// ── Render stats ──────────────────────────────────────────
 function renderStats(transactions) {
     let income  = 0;
     let expense = 0;
@@ -169,7 +157,6 @@ function renderStats(transactions) {
     document.getElementById("stat-count").textContent   = transactions.length;
 }
 
-// ── Load transactions ─────────────────────────────────────
 async function loadTransactions() {
     if (!getToken()) {
         window.location.href = "/";
@@ -194,7 +181,6 @@ async function loadTransactions() {
     }
 }
 
-//Initializing required functions
 window.onload = function () {
     loadUser();
     loadTransactions();
