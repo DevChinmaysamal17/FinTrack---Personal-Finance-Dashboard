@@ -125,7 +125,7 @@ function renderTable(transactions) {
 
     transactions.forEach(tx => {
         const cat  = tx.category ? tx.category.name : "—";
-        const sign = tx.type === "income" ? "+" : "−";
+        const sign = tx.type === "income" ? "+" : "-";
         const date = formatDate(tx.date);
 
         html += `
