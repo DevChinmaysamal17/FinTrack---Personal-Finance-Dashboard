@@ -47,6 +47,7 @@ function showToast(message, type = "success") {
     setTimeout(() => toast.remove(), 3000);
 }
 
+// To get username and email on the bottom left
 async function loadUser() {
     const token = getToken();
     if (!token) {
@@ -71,6 +72,7 @@ async function loadUser() {
     }
 }
 
+// To load categories 
 async function loadCategories() {
     try {
         const response = await fetch(`${BASE_URL}/categories`, {

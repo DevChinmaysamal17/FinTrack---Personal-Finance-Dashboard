@@ -13,6 +13,7 @@ router = APIRouter(
     tags=["Categories"]
 )
 
+# Adding a category to a particular transactiona and user
 @router.post("/", response_model=CategoryResponse)
 def create_category(
     request: CategoryCreate,
@@ -28,7 +29,7 @@ def create_category(
     db.refresh(category)
     return category
 
-
+# Get all trasactions
 @router.get("/", response_model=list[CategoryResponse])
 def all_categories(
     db: Session = Depends(get_db),
@@ -38,7 +39,7 @@ def all_categories(
         models.Category.user_id == current_user.id
     ).all()
 
-
+# Updating a category 
 @router.put("/{category_id}", response_model=CategoryResponse)
 def update_category(
     category_id: int,
@@ -59,7 +60,7 @@ def update_category(
     db.refresh(category)
     return category
 
-
+# Deleting a category 
 @router.delete("/{category_id}")
 def destroy_category(
     category_id: int,

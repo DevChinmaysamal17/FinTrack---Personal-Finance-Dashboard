@@ -13,6 +13,7 @@ router = APIRouter(
     tags=["Budgets"]
 )
 
+# Creating a new budget 
 @router.post("/", response_model=BudgetResponse)
 def create_budget(
     request: BudgetCreate,
@@ -28,7 +29,7 @@ def create_budget(
     db.refresh(budget)
     return budget
 
-
+# All budgets
 @router.get("/", response_model=list[BudgetResponse])
 def all_budget(
     db: Session = Depends(get_db),
@@ -40,7 +41,7 @@ def all_budget(
             .all()
     )
 
-
+# Updating a existing budget with id
 @router.put("/{budget_id}", response_model=BudgetResponse)
 def update_budget(
     budget_id: int,
@@ -63,7 +64,7 @@ def update_budget(
     db.refresh(budget)
     return budget
 
-
+# Deleting a budget 
 @router.delete("/{budget_id}")
 def destroy_budget(
     budget_id: int,

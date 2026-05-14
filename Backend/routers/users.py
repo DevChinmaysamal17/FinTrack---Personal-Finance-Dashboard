@@ -13,6 +13,7 @@ router = APIRouter(
     tags=["Users"]
 )
 
+# Creating a new user 
 @router.post("/", response_model=UserResponse, tags=["Users"])
 def create_user(request: UserCreate, db: Session = Depends(get_db)):
     existing_user = db.query(models.User).filter(models.User.email == request.email).first()
@@ -54,7 +55,7 @@ def create_user(request: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     return user
 
-
+# Deleting a particular user
 @router.delete("/{user_id}", tags=["Users"])
 def destroy_user(
     user_id: int,

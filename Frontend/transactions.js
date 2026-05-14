@@ -1,47 +1,31 @@
 let allTransactions = [];
 let deleteId = null;
 
+// Show add transaction card 
 function showModal() {
     document.getElementById("modal").style.display = "flex";
     document.getElementById("tx-date").value = new Date().toISOString().split("T")[0];
     loadCategories();
 }
 
+// Hide add transaction card 
 function hideModal() {
     document.getElementById("modal").style.display = "none";
 }
 
+// Show delete confirmation card 
 function showConfirm(id) {
     deleteId = id;
     document.getElementById("confirm-modal").style.display = "flex";
 }
 
+// Hide delete confirmation card 
 function hideConfirm() {
     deleteId = null;
     document.getElementById("confirm-modal").style.display = "none";
 }
 
-async function loadCategories() {
-    try {
-        const response = await fetch(`${BASE_URL}/categories`, {
-            headers: { "Authorization": "Bearer " + getToken() }
-        });
-        const categories = await response.json();
-
-        const select = document.getElementById("tx-category");
-        select.innerHTML = '<option value="">Select category</option>';
-
-        categories.forEach(cat => {
-            const option = document.createElement("option");
-            option.value = cat.id;
-            option.textContent = cat.name;
-            select.appendChild(option);
-        });
-    } catch (err) {
-        showToast("Failed to load categories", "error");
-    }
-}
-
+// To save a transaction and save it to database
 async function saveTransaction() {
     const amount      = document.getElementById("tx-amount").value;
     const type        = document.getElementById("tx-type").value;
@@ -81,6 +65,7 @@ async function saveTransaction() {
     }
 }
 
+// To detele a transaction and also removing it from the database
 async function confirmDelete() {
     if (!deleteId) return;
 
@@ -101,7 +86,7 @@ async function confirmDelete() {
     }
 }
 
-
+// To apply fiter on transactions 
 function applyFilter() {
     const type = document.getElementById("filter-type").value;
     const filtered = type === ""
@@ -112,7 +97,7 @@ function applyFilter() {
     renderStats(filtered);
 }
 
-
+// To show a new transaction in the table 
 function renderTable(transactions) {
     const tbody = document.getElementById("tx-body");
 
@@ -157,6 +142,7 @@ function renderStats(transactions) {
     document.getElementById("stat-count").textContent   = transactions.length;
 }
 
+// To load all transactions 
 async function loadTransactions() {
     if (!getToken()) {
         window.location.href = "/";
@@ -181,6 +167,7 @@ async function loadTransactions() {
     }
 }
 
+// Initializing Functions 
 window.onload = function () {
     loadUser();
     loadTransactions();

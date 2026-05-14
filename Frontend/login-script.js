@@ -1,15 +1,18 @@
 const BASE_URL = "http://127.0.0.1:8000";
 
+// To show register page 
 function showRegister() {
     document.getElementById("login-form").style.display = "none";
     document.getElementById("register-form").style.display = "block";
 }
 
+// To hide register page 
 function showLogin() {
     document.getElementById("register-form").style.display = "none";
     document.getElementById("login-form").style.display = "block";
 }
 
+// Verification of user credentials with backend
 async function login(event) {
     event.preventDefault();
 
@@ -46,6 +49,7 @@ async function login(event) {
     }
 }
 
+// To create a new user and saving that data in backend
 async function register(event) {
     event.preventDefault();
 
@@ -90,6 +94,7 @@ async function register(event) {
     }
 }
 
+// To get the current user token 
 function getToken() {
     return localStorage.getItem("token");
 }

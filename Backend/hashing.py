@@ -2,6 +2,7 @@ from passlib.context import CryptContext
 
 pwd_cxt = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+# Hashing of the password
 class Hash:
     @staticmethod
     def bcrypt(password: str):

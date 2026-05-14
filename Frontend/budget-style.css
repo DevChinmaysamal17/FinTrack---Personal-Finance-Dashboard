@@ -387,8 +387,8 @@ body {
 /* CATEGORY */
 
 .category-cell {
-    font-weight: 600;
-    color: #333;
+    color: #373737;
+    
 }
 
 
@@ -396,31 +396,23 @@ body {
 
 .spent-cell {
     color: #ef4444;
-    font-weight: 600;
+    font-weight: 501;
 }
-
-
-/* BUDGET */
 
 .budget-cell {
     color: #4040e8;
-    font-weight: 600;
+    font-weight: 501;
 }
-
-
-/* REMAINING */
 
 .remaining-cell {
     color: #22c55e;
-    font-weight: 600;
+    font-weight: 501;
 }
 
 .remaining-cell.danger {
     color: #ef4444;
+    font-weight: 501;
 }
-
-
-/* PROGRESS BAR */
 
 .budget-progress {
     width: 180px;
@@ -442,20 +434,17 @@ body {
     color: #666;
 }
 
-
-/* BUTTON */
-
 .delete-button {
-    border: none;
-    background: #ef4444;
-    color: white;
+    border: 1px solid red;
+    background: #fff0f0;
+    color: red;
     padding: 10px 14px;
     border-radius: 8px;
     cursor: pointer;
-    font-weight: 600;
     transition: 0.2s;
 }
 
 .delete-button:hover {
-    background: #dc2626;
+    background: #ec6363;
+    color: white;
 }

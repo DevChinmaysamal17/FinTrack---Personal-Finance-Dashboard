@@ -10,7 +10,7 @@ function hideModal() {
     document.getElementById("modal").style.display = "none";
 }
 
-// Save transaction:
+// To save a new transaction
 async function saveTransaction() {
     const amount      = document.getElementById("tx-amount").value;
     const type        = document.getElementById("tx-type").value;
@@ -50,7 +50,7 @@ async function saveTransaction() {
     }
 }
 
-// Load transactions:
+// Loading first 10 transactions in dashboard table
 async function loadTransactions() {
     try {
         const response = await fetch(`${BASE_URL}/transactions`, {

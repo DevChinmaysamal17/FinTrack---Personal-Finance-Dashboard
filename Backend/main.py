@@ -12,7 +12,6 @@ from Backend import models, oauth2
 from Backend.hashing import Hash
 from Backend.dependencies import get_db
 from Backend.schemas import (
-    UserCreate,
     UserResponse,
 )
 

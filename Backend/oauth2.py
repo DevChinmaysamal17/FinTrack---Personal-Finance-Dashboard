@@ -7,7 +7,7 @@ from Backend.dependencies import get_db
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
-
+# Verification of token for the current user logged in  
 def get_current_user(token: str = Depends(oauth2_scheme),db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
         status_code=401,

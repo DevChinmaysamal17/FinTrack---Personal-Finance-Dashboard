@@ -11,23 +11,10 @@ class User(Base):
     email = Column(String, unique=True, nullable=False, index=True)
     password = Column(String, nullable=False)
 
-    transactions = relationship(
-        "Transaction",
-        back_populates="user",
-        cascade="all, delete-orphan"
-    )
-
-    categories = relationship(
-        "Category",
-        back_populates="user",
-        cascade="all, delete-orphan"
-    )
-
-    budgets = relationship(
-        "Budget",
-        back_populates="user",
-        cascade="all, delete-orphan"    
-    )
+    #Relationships
+    transactions = relationship("Transaction", back_populates="user", cascade="all, delete-orphan")
+    categories = relationship("Category", back_populates="user", cascade="all, delete-orphan")
+    budgets = relationship("Budget", back_populates="user", cascade="all, delete-orphan")
 
 
 class Category(Base):
@@ -36,27 +23,12 @@ class Category(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     category_type = Column(String, nullable=False)  
-
-    user_id = Column(
-        Integer,
-        ForeignKey("users.id", ondelete="CASCADE"),
-        nullable=False
-    )
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
 
     # Relationships
     user = relationship("User", back_populates="categories")
-
-    transactions = relationship(
-        "Transaction",
-        back_populates="category",
-        cascade="all, delete-orphan"
-    )
-
-    budgets = relationship(
-        "Budget",
-        back_populates="category",
-        cascade="all, delete-orphan"
-    )
+    transactions = relationship("Transaction", back_populates="category", cascade="all, delete-orphan")
+    budgets = relationship("Budget", back_populates="category", cascade="all, delete-orphan")
 
 
 class Transaction(Base):
@@ -73,6 +45,7 @@ class Transaction(Base):
     category_id = Column(Integer, ForeignKey("categories.id"))
     user_id = Column(Integer, ForeignKey("users.id"))
 
+    # Relationships
     user = relationship("User", back_populates="transactions")
     category = relationship("Category", back_populates="transactions")
 
@@ -86,6 +59,7 @@ class Budget(Base):
     category_id = Column(Integer,ForeignKey("categories.id", ondelete="CASCADE"),nullable=False)
     user_id = Column(Integer,ForeignKey("users.id", ondelete="CASCADE"),nullable=False)
 
+    # Relationships
     user = relationship("User", back_populates="budgets")
     category = relationship("Category", back_populates="budgets")
 

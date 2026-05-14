@@ -46,37 +46,35 @@ async function saveBudget() {
 }
 
 async function loadBudgets() {
-
     try {
-
         const token = getToken();
 
         const budgetResponse = await fetch(`${BASE_URL}/budgets`, {
-            headers: {
-                "Authorization": "Bearer " + token
-            }
+            headers: { "Authorization": "Bearer " + token }
         });
 
         const txResponse = await fetch(`${BASE_URL}/transactions`, {
-            headers: {
-                "Authorization": "Bearer " + token
-            }
+            headers: { "Authorization": "Bearer " + token }
         });
 
-        if (!budgetResponse.ok || !txResponse.ok) {
-            throw new Error("Failed to fetch data");
-        }
+        if (!budgetResponse.ok || !txResponse.ok) throw new Error("Failed to fetch data");
 
-        const budgets = await budgetResponse.json();
+        const budgets      = await budgetResponse.json();
         const transactions = await txResponse.json();
 
         const budgetList = document.getElementById("budget-list");
 
-        // TABLE STRUCTURE
+        if (budgets.length === 0) {
+            budgetList.innerHTML = "<p class='empty-msg'>No budgets set yet. Click '+ Set Budget' to add one.</p>";
+            document.getElementById("card-total").textContent     = "₹0";
+            document.getElementById("card-spent").textContent     = "₹0";
+            document.getElementById("card-remaining").textContent = "₹0";
+            return;
+        }
+
+        // Build table
         budgetList.innerHTML = `
-
             <table class="budget-table">
-
                 <thead>
                     <tr>
                         <th>Category</th>
@@ -87,127 +85,64 @@ async function loadBudgets() {
                         <th>Action</th>
                     </tr>
                 </thead>
-
-                <tbody id="budget-table-body">
-
-                </tbody>
-
+                <tbody id="budget-table-body"></tbody>
             </table>
         `;
 
         const tableBody = document.getElementById("budget-table-body");
 
-        budgets.forEach(budget => {
+        // Track totals for cards
+        let totalBudget = 0;
+        let totalSpent  = 0;
 
+        budgets.forEach(budget => {
+            // Calculate spent for this category
             const spent = transactions
                 .filter(tx =>
-                    tx.type.toLowerCase() === "expense" &&
-                    (
-                        tx.category_id === budget.category_id ||
-                        tx.category?.id === budget.category_id
-                    )
+                    tx.type.trim().toLowerCase() === "expense" &&
+                    Number(tx.category_id) === Number(budget.category_id)
+                )
+                .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
-)
-                .reduce((sum, tx) => sum + tx.amount, 0);
+            // Add to totals
+            totalBudget += Number(budget.amount);
+            totalSpent  += spent;
 
-            const percentage = Math.min(
-                (spent / budget.amount) * 100,
-                100
-            );
-
-            const remaining = budget.amount - spent;
+            // Progress bar
+            const percentage = Math.min((spent / budget.amount) * 100, 100);
+            const remaining  = budget.amount - spent;
 
             let progressColor = "#22c55e";
-
-            if (percentage > 85) {
-                progressColor = "#ef4444";
-            }
-            else if (percentage > 50) {
-                progressColor = "#f59e0b";
-            }
+            if (percentage > 85)      progressColor = "#ef4444";
+            else if (percentage > 50) progressColor = "#f59e0b";
 
             const row = document.createElement("tr");
-
             row.innerHTML = `
-
-                <td class="category-cell">
-                    ${budget.category.name}
-                </td>
-
-                <td class="spent-cell">
-                    ₹${spent.toFixed(2)}
-                </td>
-
-                <td class="budget-cell">
-                    ₹${budget.amount.toFixed(2)}
-                </td>
-
-                <td class="remaining-cell ${remaining < 0 ? 'danger' : ''}">
-                    ₹${remaining.toFixed(2)}
-                </td>
-
+                <td class="category-cell">${budget.category.name}</td>
+                <td class="spent-cell">₹${spent.toFixed(2)}</td>
+                <td class="budget-cell">₹${budget.amount.toFixed(2)}</td>
+                <td class="remaining-cell ${remaining < 0 ? 'danger' : ''}">₹${remaining.toFixed(2)}</td>
                 <td>
-
                     <div class="budget-progress">
-
-                        <div
-                            class="progress-fill"
-                            style="
-                                width:${percentage}%;
-                                background:${progressColor};
-                            "
-                        ></div>
-
+                        <div class="progress-fill" style="width:${percentage}%; background:${progressColor};"></div>
                     </div>
-
-                    <div class="progress-text">
-                        ${percentage.toFixed(0)}% Used
-                    </div>
-
+                    <div class="progress-text">${percentage.toFixed(0)}% Used</div>
                 </td>
-
                 <td>
-
-                    <button
-                        class="delete-button"
-                        onclick="deleteBudget(${budget.id})"
-                    >
-                        Delete
-                    </button>
-
+                    <button class="delete-button" onclick="deleteBudget(${budget.id})">Delete</button>
                 </td>
             `;
-
             tableBody.appendChild(row);
         });
 
+        // Update cards
+        document.getElementById("card-total").textContent     = "₹" + totalBudget.toFixed(2);
+        document.getElementById("card-spent").textContent     = "₹" + totalSpent.toFixed(2);
+        document.getElementById("card-remaining").textContent = "₹" + (totalBudget - totalSpent).toFixed(2);
+
     } catch (err) {
-
         console.error(err);
-
         showToast("Failed to load budgets", "error");
-    }
-}
-
-async function deleteBudget(id) {
-    try {
-        const response = await fetch(`${BASE_URL}/budgets/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Authorization": "Bearer " + getToken()
-            }
-        });
-
-
-        if (!response.ok) {
-            throw new Error("Failed to delete budget");
-        }
-        showToast("Budget deleted!", "success");
-        loadBudgets();
-
-    } catch (err) {
-        console.error(err);
-        showToast("Failed to delete budget", "error");
     }
 }
 

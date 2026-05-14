@@ -13,6 +13,7 @@ router = APIRouter(
     tags=["Transactions"]
 )
 
+# Creating a new transaction for a particular user 
 @router.post("/", response_model=TransactionResponse)
 def create_transaction(
     request: TransactionCreate,
@@ -33,7 +34,7 @@ def create_transaction(
 
     return transaction
 
-
+# Get all transactions of that particular user
 @router.get("/", response_model=list[TransactionResponse])
 def get_transactions(
     skip: int = 0,
@@ -51,7 +52,7 @@ def get_transactions(
         .all()
     )
 
-
+# Updating a transactions of that particular user
 @router.put("/{transaction_id}", response_model=TransactionResponse)
 def update_transaction(
     transaction_id: int,
@@ -74,7 +75,7 @@ def update_transaction(
     db.refresh(transaction)
     return transaction
 
-
+# Deleting a transactions of that particular user
 @router.delete("/{transaction_id}", tags=["Transactions"])
 def destroy_transaction(
     transaction_id: int,
