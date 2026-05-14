@@ -5,12 +5,9 @@ from fastapi.staticfiles import StaticFiles
 from Backend.database import engine
 from Backend import models
 from Backend.routers import auth, users, transactions, categories, budgets
-from fastapi import Depends, HTTPException, APIRouter
-from sqlalchemy.orm import Session
+from fastapi import Depends
 from Backend.database import engine
 from Backend import models, oauth2
-from Backend.hashing import Hash
-from Backend.dependencies import get_db
 from Backend.schemas import (
     UserResponse,
 )

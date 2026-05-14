@@ -1,6 +1,5 @@
 from fastapi import Depends, HTTPException, APIRouter
 from sqlalchemy.orm import Session
-from Backend.database import engine
 from Backend import models, oauth2
 from Backend.hashing import Hash
 from Backend.dependencies import get_db
