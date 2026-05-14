@@ -146,6 +146,23 @@ async function loadBudgets() {
     }
 }
 
+async function deleteBudget(id) {
+    try {
+        const response = await fetch(`${BASE_URL}/budgets/${id}`, {
+            method: "DELETE",
+            headers: { "Authorization": "Bearer " + getToken() }
+        });
+
+        if (!response.ok) throw new Error("Failed to delete");
+
+        showToast("Budget Deleted!");
+        await loadBudgets();
+
+    } catch (err) {
+        showToast("Failed to delete budget", "error");
+    }
+}
+
 window.onload = function () {
     loadUser();
     loadBudgets();
