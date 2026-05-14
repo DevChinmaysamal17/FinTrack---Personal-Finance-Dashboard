@@ -177,15 +177,15 @@ http://127.0.0.1:8000
 
 ---
 
-## 📸 Screenshots
+## 📸 static/Screenshots
 
 | Login | Dashboard |
 |---|---|
-| ![Login](screenshots/login.png) | ![Dashboard](screenshots/dashboard.png) |
+| ![Login](static/screenshots/Login.png) | ![Dashboard](static/screenshots/Dashboard.png) |
 
 | Transactions | Budget |
 |---|---|
-| ![Transactions](screenshots/transactions.png) | ![Budget](screenshots/budget.png) |
+| ![Transactions](static/screenshots/Transaction.png) | ![Budget](static/screenshots/Budget.png) |
 
 ---
 
