@@ -6,8 +6,8 @@ A full-stack deployed personal finance management application built with FastAPI
 
 ## 🚀 Live Demo
 
-🌐 Live App: https://fintrack-p2n3.onrender.com  
-📘 API Docs: https://fintrack-p2n3.onrender.com/docs  
+🌐 Live App: https://fintrack-p2n3.onrender.com
+📘 API Docs: https://fintrack-p2n3.onrender.com/docs
 📁 GitHub Repository: https://github.com/DevChinmaysamal17/FinTrack---Personal-Finance-Dashboard
 
 ---
@@ -50,6 +50,7 @@ A full-stack deployed personal finance management application built with FastAPI
 | Database | PostgreSQL |
 | Authentication | JWT, OAuth2, Passlib/Bcrypt |
 | Frontend | HTML5, CSS3, Vanilla JavaScript |
+| Containerization | Docker, Docker Compose |
 | Deployment | Render |
 | Tools | Git, GitHub, REST APIs, Fetch API |
 
@@ -111,6 +112,9 @@ FinTrack/
 │   ├── *.js
 │   └── *.css
 │
+├── Dockerfile
+├── docker-compose.yaml
+├── .dockerignore
 ├── requirements.txt
 ├── .env.example
 ├── README.md
@@ -174,7 +178,39 @@ FinTrack/
 
 # ⚙️ Local Setup
 
-## 1. Clone Repository
+## Option 1 — Run with Docker (Recommended) 🐳
+
+### Prerequisites
+- [Docker](https://www.docker.com/get-started) installed
+
+### Steps
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/DevChinmaysamal17/FinTrack---Personal-Finance-Dashboard.git
+cd FinTrack---Personal-Finance-Dashboard
+
+# 2. Create your .env file
+cp .env.example .env
+# Edit .env with your values
+
+# 3. Start the app
+docker compose up
+```
+
+App will be live at: `http://localhost:8000`
+API docs at: `http://localhost:8000/docs`
+
+To stop:
+```bash
+docker compose down
+```
+
+---
+
+## Option 2 — Run Manually (without Docker)
+
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/DevChinmaysamal17/FinTrack---Personal-Finance-Dashboard.git
@@ -183,27 +219,27 @@ cd FinTrack---Personal-Finance-Dashboard
 
 ---
 
-## 2. Create Virtual Environment
+### 2. Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-### Activate Environment
+#### Activate Environment
 
-#### Windows
+**Windows**
 ```bash
 venv\Scripts\activate
 ```
 
-#### Mac/Linux
+**Mac/Linux**
 ```bash
 source venv/bin/activate
 ```
 
 ---
 
-## 3. Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -211,7 +247,7 @@ pip install -r requirements.txt
 
 ---
 
-## 4. Configure Environment Variables
+### 4. Configure Environment Variables
 
 Create `.env` file:
 
@@ -224,7 +260,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES=30
 
 ---
 
-## 5. Run Application
+### 5. Run Application
 
 ```bash
 uvicorn Backend.main:app --reload
@@ -232,9 +268,9 @@ uvicorn Backend.main:app --reload
 
 ---
 
-## 6. Open Application
+### 6. Open Application
 
-```text
+```
 http://127.0.0.1:8000
 ```
 
@@ -254,7 +290,6 @@ The application is deployed on Render using:
 - [ ] Charts & financial analytics
 - [ ] Transaction search & filters
 - [ ] Mobile responsiveness
-- [ ] Docker containerization
 - [ ] Email verification
 - [ ] Password reset functionality
 - [ ] Export reports as PDF/Excel
@@ -266,9 +301,9 @@ The application is deployed on Render using:
 
 ## Chinmay Samal
 
-First-Year Engineering Student focused on Backend & Full-Stack Development.
+First-Year Engineering Student focused on Backend Development, Cloud & DevOps.
 
 - GitHub: https://github.com/DevChinmaysamal17
-- LinkedIn: Add your LinkedIn profile here
+- LinkedIn: https://www.linkedin.com/in/chinmay-samal
 
 ---
