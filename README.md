@@ -47,7 +47,7 @@ A full-stack deployed personal finance management application built with FastAPI
 | Layer | Technologies |
 |---|---|
 | Backend | FastAPI, SQLAlchemy, Pydantic |
-| Database | PostgreSQL |
+| Database | PostgreSQL (Supabase) |
 | Authentication | JWT, OAuth2, Passlib/Bcrypt |
 | Frontend | HTML5, CSS3, Vanilla JavaScript |
 | Containerization | Docker, Docker Compose |
@@ -61,9 +61,9 @@ A full-stack deployed personal finance management application built with FastAPI
 ```text
 Frontend (HTML/CSS/JS)
         ↓
-FastAPI Backend
+FastAPI Backend (Render)
         ↓
-PostgreSQL Database
+PostgreSQL Database (Supabase)
 ```
 
 ---
@@ -252,11 +252,13 @@ pip install -r requirements.txt
 Create `.env` file:
 
 ```env
-DATABASE_URL=your_postgresql_database_url
+DATABASE_URL=your_supabase_postgresql_connection_string
 SECRET_KEY=your_secret_key
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
+
+> 💡 Get your `DATABASE_URL` from [Supabase](https://supabase.com) → Project → Connect → Session Pooler → URI
 
 ---
 
@@ -279,8 +281,8 @@ http://127.0.0.1:8000
 # 🚀 Deployment
 
 The application is deployed on Render using:
-- FastAPI backend service
-- PostgreSQL cloud database
+- FastAPI backend service on Render (free tier)
+- PostgreSQL cloud database on Supabase (free tier, permanent)
 - Automatic GitHub-based CI/CD deployment
 
 ---
@@ -304,6 +306,6 @@ The application is deployed on Render using:
 First-Year Engineering Student focused on Backend Development, Cloud & DevOps.
 
 - GitHub: https://github.com/DevChinmaysamal17
-- LinkedIn: https://www.linkedin.com/in/chinmay-samal
+- LinkedIn: https://www.linkedin.com/in/chinmay-samal-492a72387/
 
 ---
