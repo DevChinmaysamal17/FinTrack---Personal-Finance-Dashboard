@@ -1,6 +1,6 @@
 # FinTrack — Personal Finance Dashboard
 
-A full-stack deployed personal finance management application built with FastAPI and PostgreSQL that helps users track expenses, manage category-wise budgets, and monitor financial activity through a secure dashboard.
+Production-ready personal finance dashboard built with FastAPI and PostgreSQL, featuring JWT authentication, Docker containerization, and an automated CI/CD pipeline via GitHub Actions.
 
 ---
 
