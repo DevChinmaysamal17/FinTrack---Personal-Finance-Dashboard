@@ -7,42 +7,44 @@ A full-stack deployed personal finance management application built with FastAPI
 ## 🚀 Live Demo
 
 🌐 Live App: https://fintrack-p2n3.onrender.com
+
 📘 API Docs: https://fintrack-p2n3.onrender.com/docs
+
 📁 GitHub Repository: https://github.com/DevChinmaysamal17/FinTrack---Personal-Finance-Dashboard
 
 ---
 
-# ✨ Features
+## ✨ Features
 
-## 🔐 Authentication & Security
+### 🔐 Authentication & Security
 - JWT Authentication using OAuth2
 - Secure password hashing with Bcrypt
 - Protected API routes
 - User-specific data isolation
 
-## 📊 Dashboard
+### 📊 Dashboard
 - Income vs Expense overview
 - Real-time financial summary
 - Dynamic frontend rendering using Fetch API
 
-## 💸 Transactions
+### 💸 Transactions
 - Add, update, delete transactions
 - Income & expense tracking
 - Category-based organization
 
-## 📁 Budget Management
+### 📁 Budget Management
 - Monthly category-wise budgets
 - Budget vs spending tracking
 - Visual budget progress indicators
 
-## 🗂️ Categories
+### 🗂️ Categories
 - Create custom categories
 - Separate income & expense types
 - Auto-generated default categories for new users
 
 ---
 
-# 🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 | Layer | Technologies |
 |---|---|
@@ -51,12 +53,34 @@ A full-stack deployed personal finance management application built with FastAPI
 | Authentication | JWT, OAuth2, Passlib/Bcrypt |
 | Frontend | HTML5, CSS3, Vanilla JavaScript |
 | Containerization | Docker, Docker Compose |
+| CI/CD | GitHub Actions |
+| Container Registry | GitHub Container Registry (GHCR) |
 | Deployment | Render |
 | Tools | Git, GitHub, REST APIs, Fetch API |
 
 ---
 
-# 🏗️ Architecture
+## ⚙️ CI/CD Pipeline
+
+This project uses **GitHub Actions** for automated testing and Docker image publishing.
+
+### Pipeline flow:
+```
+Push to main → Run pytest → Build Docker image → Push to GHCR
+```
+
+### Jobs:
+- **test** — Sets up Python 3.12, installs dependencies, runs pytest
+- **docker** — Builds Docker image and pushes to `ghcr.io/devchinmaysamal17/fintrack:latest` (only on `main` after tests pass)
+
+### Pull the latest image:
+```bash
+docker pull ghcr.io/devchinmaysamal17/fintrack:latest
+```
+
+---
+
+## 🏗️ Architecture
 
 ```text
 Frontend (HTML/CSS/JS)
@@ -68,29 +92,23 @@ PostgreSQL Database (Supabase)
 
 ---
 
-# 📸 Screenshots
+## 📸 Screenshots
 
-## Login Page
+### Login Page
 ![Login](Frontend/screenshots/Login.png)
 
----
-
-## Dashboard
+### Dashboard
 ![Dashboard](Frontend/screenshots/Dashboard.png)
 
----
-
-## Transactions
+### Transactions
 ![Transactions](Frontend/screenshots/Transaction.png)
 
----
-
-## Budget Management
+### Budget Management
 ![Budget](Frontend/screenshots/Budget.png)
 
 ---
 
-# 📁 Project Structure
+## 📁 Project Structure
 
 ```text
 FinTrack/
@@ -112,6 +130,13 @@ FinTrack/
 │   ├── *.js
 │   └── *.css
 │
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── tests/
+│   └── test_basic.py
+│
 ├── Dockerfile
 ├── docker-compose.yaml
 ├── .dockerignore
@@ -123,17 +148,15 @@ FinTrack/
 
 ---
 
-# 🔌 API Endpoints
+## 🔌 API Endpoints
 
-## Authentication
+### Authentication
 
 | Method | Endpoint | Description |
 |---|---|---|
 | POST | `/login` | User login & JWT token generation |
 
----
-
-## Users
+### Users
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -141,9 +164,7 @@ FinTrack/
 | GET | `/me` | Current user profile |
 | DELETE | `/users/{id}` | Delete account |
 
----
-
-## Transactions
+### Transactions
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -152,9 +173,7 @@ FinTrack/
 | PUT | `/transactions/{id}` | Update transaction |
 | DELETE | `/transactions/{id}` | Delete transaction |
 
----
-
-## Categories
+### Categories
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -163,9 +182,7 @@ FinTrack/
 | PUT | `/categories/{id}` | Update category |
 | DELETE | `/categories/{id}` | Delete category |
 
----
-
-## Budgets
+### Budgets
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -176,14 +193,9 @@ FinTrack/
 
 ---
 
-# ⚙️ Local Setup
+## ⚙️ Local Setup
 
-## Option 1 — Run with Docker (Recommended) 🐳
-
-### Prerequisites
-- [Docker](https://www.docker.com/get-started) installed
-
-### Steps
+### Option 1 — Run with Docker (Recommended) 🐳
 
 ```bash
 # 1. Clone the repository
@@ -198,59 +210,29 @@ cp .env.example .env
 docker compose up
 ```
 
-App will be live at: `http://localhost:8000`
-API docs at: `http://localhost:8000/docs`
+App: `http://localhost:8000`
+API docs: `http://localhost:8000/docs`
 
-To stop:
 ```bash
+# Stop without losing data
 docker compose down
 ```
 
 ---
 
-## Option 2 — Run Manually (without Docker)
-
-### 1. Clone Repository
+### Option 2 — Run Manually
 
 ```bash
 git clone https://github.com/DevChinmaysamal17/FinTrack---Personal-Finance-Dashboard.git
 cd FinTrack---Personal-Finance-Dashboard
-```
 
----
-
-### 2. Create Virtual Environment
-
-```bash
 python -m venv venv
-```
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-#### Activate Environment
-
-**Windows**
-```bash
-venv\Scripts\activate
-```
-
-**Mac/Linux**
-```bash
-source venv/bin/activate
-```
-
----
-
-### 3. Install Dependencies
-
-```bash
 pip install -r requirements.txt
 ```
 
----
-
-### 4. Configure Environment Variables
-
-Create `.env` file:
-
+Create `.env`:
 ```env
 DATABASE_URL=your_supabase_postgresql_connection_string
 SECRET_KEY=your_secret_key
@@ -258,36 +240,24 @@ ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
-> 💡 Get your `DATABASE_URL` from [Supabase](https://supabase.com) → Project → Connect → Session Pooler → URI
-
----
-
-### 5. Run Application
-
 ```bash
 uvicorn Backend.main:app --reload
 ```
 
----
-
-### 6. Open Application
-
-```
-http://127.0.0.1:8000
-```
+Open: `http://127.0.0.1:8000`
 
 ---
 
-# 🚀 Deployment
+## 🚀 Deployment
 
-The application is deployed on Render using:
-- FastAPI backend service on Render (free tier)
-- PostgreSQL cloud database on Supabase (free tier, permanent)
-- Automatic GitHub-based CI/CD deployment
+- FastAPI backend on Render (free tier)
+- PostgreSQL on Supabase (free tier, permanent)
+- Docker image on GHCR (`ghcr.io/devchinmaysamal17/fintrack:latest`)
+- GitHub Actions CI/CD on every push to `main`
 
 ---
 
-# 🗺️ Future Improvements
+## 🗺️ Future Improvements
 
 - [ ] Charts & financial analytics
 - [ ] Transaction search & filters
@@ -299,13 +269,9 @@ The application is deployed on Render using:
 
 ---
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
-## Chinmay Samal
-
-First-Year Engineering Student focused on Backend Development, Cloud & DevOps.
+**Chinmay Samal** — First-Year Engineering Student focused on Backend Development, Cloud & DevOps.
 
 - GitHub: https://github.com/DevChinmaysamal17
 - LinkedIn: https://www.linkedin.com/in/chinmay-samal-492a72387/
-
----
