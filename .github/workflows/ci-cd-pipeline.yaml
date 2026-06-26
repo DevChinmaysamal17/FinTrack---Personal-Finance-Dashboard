@@ -51,4 +51,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/fintrack:latest
+          tags: ghcr.io/devchinmaysamal17/fintrack:latest
