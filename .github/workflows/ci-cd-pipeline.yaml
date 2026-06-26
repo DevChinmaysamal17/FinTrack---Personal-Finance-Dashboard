@@ -15,7 +15,7 @@ jobs:
 
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
     steps:
       - name: Checkout code
