@@ -54,4 +54,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/DevChinmaysamal17/fintrack:latest
+          tags: ghcr.io/devchinmaysamal17/fintrack:latest
