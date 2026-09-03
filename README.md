@@ -280,8 +280,6 @@ git clone https://github.com/DevChinmaysamal17/FinTrack---Personal-Finance-Dashb
 cd FinTrack---Personal-Finance-Dashboard
 
 cp .env.example .env
-# For the API container, DATABASE_URL should use the Compose service hostname, e.g.
-# DATABASE_URL=postgresql://chinmaydattatraysamal:chinmaydattatraysamal@db:5432/finance_db
 
 docker compose up
 ```
