@@ -3,25 +3,26 @@ from unittest.mock import MagicMock, patch
 from fastapi import HTTPException
 from Backend.routers.users import create_user, destroy_user
 from Backend.schemas import UserCreate
+from Backend.oauth2 import get_current_user
 
 
-# def test_get_current_user():
+def test_get_current_user():
 
-#   db = MagicMock()
+  db = MagicMock()
 
-#   token_data = MagicMock()
-#   token_data.id = 1
+  token_data = MagicMock()
+  token_data.id = 1
 
-#   user = MagicMock()
-#   user.id =1
+  user = MagicMock()
+  user.id =1
 
-#   db.query.return_value.filter.return_value.first.return_value = user
+  db.query.return_value.filter.return_value.first.return_value = user
 
-#   with patch("Backend.oauth2.jwt_token.verify_token", return_value = token_data):
-#     result = get_current_user(token="fake_token", db=db)
+  with patch("Backend.oauth2.jwt_token.verify_token", return_value = token_data):
+    result = get_current_user(token="fake_token", db=db)
 
-#     assert result is user
-#     assert result.id == 1
+    assert result is user
+    assert result.id == 1
 
 
 @patch("Backend.routers.users.Hash.bcrypt")
